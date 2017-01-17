@@ -69,6 +69,42 @@
       <version>${jstl.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-buffer</artifactId>
+      <version>4.1.5.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>4.1.5.Final</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -88,35 +124,53 @@
       </plugin>
 
       <!-- For Maven Tomcat Plugin -->
-      <plugin>
-        <groupId>org.apache.tomcat.maven</groupId>
-        <artifactId>tomcat7-maven-plugin</artifactId>
-        <version>2.2</version>
-        <configuration>
-          <!--Deploy to server-->
-          <url>http://localhost:8080/manager/text</url>
-          <server>Tomcat7Server</server>
-          <path>/CounterWebApp</path>
-        </configuration>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.apache.tomcat.maven</groupId>-->
+        <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+        <!--<version>2.2</version>-->
+        <!--<configuration>-->
+          <!--&lt;!&ndash;Deploy to server&ndash;&gt;-->
+          <!--<url>http://localhost:8080/manager/text</url>-->
+          <!--<server>Tomcat7Server</server>-->
+          <!--<path>/CounterWebApp</path>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
+
+      <!--<plugin>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-maven-plugin</artifactId>-->
+        <!--<version>9.4.0.v20161208</version>-->
+        <!--<configuration>-->
+          <!--<stopPort>9988</stopPort>-->
+          <!--<stopKey>foo</stopKey>-->
+          <!--<scanIntervalSeconds>5</scanIntervalSeconds>-->
+          <!--<connectors>-->
+            <!--<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">-->
+              <!--<port>8080</port>-->
+              <!--<maxIdleTime>60000</maxIdleTime>-->
+            <!--</connector>-->
+          <!--</connectors>-->
+          <!--<webAppConfig>-->
+            <!--<contextPath>/</contextPath>-->
+          <!--</webAppConfig>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
 
       <plugin>
-        <groupId>org.eclipse.jetty</groupId>
+        <groupId>org.mortbay.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.4.0.v20161208</version>
+        <version>8.1.8.v20121106</version>
         <configuration>
-          <stopPort>9988</stopPort>
-          <stopKey>foo</stopKey>
-          <scanIntervalSeconds>5</scanIntervalSeconds>
+          <reload>manual</reload>
+          <webAppConfig>
+            <contextPath>/${project.build.finalName}</contextPath>
+          </webAppConfig>
           <connectors>
             <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-              <port>8080</port>
-              <maxIdleTime>60000</maxIdleTime>
+              <port>9080</port>
+              <!--<maxIdleTime>60000</maxIdleTime>-->
             </connector>
           </connectors>
-          <webAppConfig>
-            <contextPath>/</contextPath>
-          </webAppConfig>
         </configuration>
       </plugin>
 
